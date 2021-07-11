@@ -6,7 +6,7 @@ RUN apt-get update && \
     curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
     apt-get install -y nodejs && \
     npm install -g yarn && \
-    mkdir /build && curl -L https://raw.githubusercontent.com/theia-ide/theia-apps/master/theia-docker/latest.package.json > /build/package.json
+    mkdir /build && curl -L https://raw.githubusercontent.com/theia-ide/theia-apps/master/theia-docker/next.package.json > /build/package.json
 
 # BUILD
 WORKDIR /build
@@ -30,7 +30,7 @@ COPY --from=builder /build /opt/theia
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 # INSTALL DEPS
-RUN apt-get update -y && apt-get install -y curl sudo nano && \
+RUN apt-get update -y && apt-get install -y curl sudo nano libsecret-1-0 && \
     curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
     apt-get install -y nodejs git
 
