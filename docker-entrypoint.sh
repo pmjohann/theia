@@ -7,6 +7,13 @@ if [ ! -z $INSTALL ]; then
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y $INSTALL
 fi
 
+# IF PRECONFIG SCRIPT MOUNTED
+if [ -f /preconf.sh ]; then
+
+    # RUN IT
+    /bin/sh /preconf.sh
+fi
+
 # OWN REPOS DIR
 sudo chown -R user:user /repos
 
