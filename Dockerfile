@@ -3,7 +3,7 @@ FROM ubuntu:focal AS builder
 # INSTALL DEPS
 RUN apt-get update && \
     apt-get install -y curl build-essential sudo && \
-    curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - && \
+    curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
     apt-get install -y nodejs && \
     npm install -g yarn && \
     mkdir /build && curl -L https://raw.githubusercontent.com/theia-ide/theia-apps/master/theia-docker/latest.package.json > /build/package.json
@@ -11,7 +11,7 @@ RUN apt-get update && \
 # BUILD
 WORKDIR /build
 RUN yarn --pure-lockfile && \
-    NODE_OPTIONS="--max_old_space_size=2048" yarn theia build && \
+    NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
     yarn theia download:plugins && \
     yarn --production && \
     yarn autoclean --init && \
@@ -31,7 +31,7 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 # INSTALL DEPS
 RUN apt-get update -y && apt-get install -y curl sudo nano && \
-    curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - && \
+    curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
     apt-get install -y nodejs git
 
 # SETUP USER
