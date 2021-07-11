@@ -1,4 +1,4 @@
-FROM ubuntu:bionic AS builder
+FROM ubuntu:focal AS builder
 
 # INSTALL DEPS
 RUN apt-get update && \
@@ -23,7 +23,7 @@ RUN yarn --pure-lockfile && \
 
 ########## ########## ##########
 
-FROM ubuntu:bionic
+FROM ubuntu:focal
 
 # COPY REQUIREMENTS
 COPY --from=builder /build /opt/theia
