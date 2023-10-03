@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # IF APT INSTALLS REQUESTED VIA ENV VAR
-if [ ! -z $INSTALL ]; then
+if [ ! -z "$INSTALL" ]; then
 
     # PERFORM INSTALLATIONS
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y $INSTALL
